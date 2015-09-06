@@ -18,7 +18,6 @@
             <ul class="nav navbar-nav">
                 <c:forEach var="menuItem" items="${menuItems}">
                     <c:set var="active" value="${fn:endsWith(pageContext.request.requestURL, menuItem.url)}" />
-                    <c:out value="${pageContext.request.requestURI}" /> / <c:out value="${menuItem.url}" />
                     <li class="active"><a href="${menuItem.url}">${menuItem.name}</a></li>
                 </c:forEach>
                 <c:if test="${pageContext.request.userPrincipal.name != null}">

@@ -1,9 +1,12 @@
 package com.epuras.mongocms.admin.web;
 
 import com.epuras.mongocms.admin.web.domain.MainMenuItem;
+import com.epuras.mongocms.admin.web.services.AdminUIService;
+import com.epuras.mongocms.admin.web.services.AdminUIServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,17 +14,10 @@ import java.util.List;
  */
 public class AdminViewModel extends ModelAndView {
 
-    public AdminViewModel(){
-        List<MainMenuItem> mainMenuItemList = new ArrayList<MainMenuItem>();
-        MainMenuItem item1 = new MainMenuItem();
-        item1.setName("UNU");
-        item1.setUrl("UNU_URL");
-        mainMenuItemList.add(item1);
-        MainMenuItem item2 = new MainMenuItem();
-        item2.setName("DOI");
-        item2.setUrl("DOI_URL");
-        mainMenuItemList.add(item2);
+    private AdminUIService adminUIService = new AdminUIServiceImpl();
 
-        this.addObject("menuItems", mainMenuItemList);
+    public AdminViewModel(){
+        List<MainMenuItem> mainMenuItems = adminUIService.getMainMenu();
+        this.addObject("menuItems", mainMenuItems);
     }
 }
