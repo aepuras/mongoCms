@@ -13,11 +13,18 @@ import java.util.List;
 /**
  * Created by adriane on 21/08/15.
  */
+@Component
 public class AdminViewModel extends ModelAndView {
 
-    private AdminUIService adminUIService = new AdminUIServiceImpl();
 
-    public AdminViewModel(){
+    private AdminUIService adminUIService;
+
+    @Autowired
+    public AdminViewModel(AdminUIService adminUIService) {
+        this.adminUIService = adminUIService;
+    }
+
+    public void loadData() {
         List<MainMenuItem> mainMenuItems = adminUIService.getMainMenu();
         this.addObject("menuItems", mainMenuItems);
     }
